@@ -42,8 +42,12 @@ nix-channel --add https://github.com/nix-community/home-manager/archive/master.t
 nix-channel --update
 nix-shell '<home-manager>' -A install
 
-## May need some stuff from unstabled nix channel, so add that channel too. 
+# May need some stuff from unstabled nix channel, so add that channel too. 
 nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs-unstable
+# Make sure OpenGL works for applicaitons installed via home-manager e.g alacritty
+nix-channel --add https://github.com/guibou/nixGL/archive/main.tar.gz nixgl 
+nix-env -iA nixgl.auto.nixGLDefault
+
 nix-channel --update
 
 
