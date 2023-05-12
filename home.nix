@@ -66,8 +66,9 @@ in {
     # need 3.17 for now for work. 
     protobuf3_17
  
-    # Other utils
+    # Other productvity utils
     _1password-gui
+    obsidian
 
     # Nix tools
     nixfmt
