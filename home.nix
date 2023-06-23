@@ -65,13 +65,15 @@ in {
     git
     # need 3.17 for now for work. 
     protobuf3_17
- 
+
     # Other productvity utils
     _1password-gui
     obsidian
 
     # Nix tools
     nixfmt
+    htop
+    patchelf
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -134,6 +136,7 @@ in {
       # nixGL allows alacritty to discover GPU driver libs (e.g. mesa). Additional setup
       # is needed that's part of setup.sh. See issue: https://github.com/NixOS/nixpkgs/issues/122671.
       alacritty = "nixGL alacritty";
+      hms = "home-manager switch";
     };
 
   };
@@ -142,11 +145,11 @@ in {
     enable = true;
     userName = "Manish Bellani";
     userEmail = "manish.bellani@gmail.com";
+    lfs.enable = true;
 
     extraConfig = {
-      merge.tool = "code";
-
-      core = { editor = "code"; };
+      merge.tool = "${pkgs.vscode}/bin/code";
+      core.editor = "code";
       url = { "git@github.com:" = { insteadOf = "https://github.com"; }; };
     };
   };
@@ -172,11 +175,11 @@ in {
           style = "red";
         }
         {
-          threshold = 20;
+          threshold = 30;
           style = "bold yellow";
         }
         {
-          threshold = 30;
+          threshold = 50;
           style = "yellow";
         }
         {
