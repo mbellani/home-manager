@@ -32,19 +32,7 @@ in {
     # Social
     slack
     signal-desktop
-
-    ## Development Environmnet ##
-
-    # Rust setup.
-    # Additional setup for this exists in program.zsh, since some rust crates need to 
-    # discover correct openssl lib and it's not aware of the system installed openssl.  
-    gcc
-    pkg-config
-    openssl
-    rustup
-
-    # go setup
-    go
+    zoom-us
 
     ## Editors
     emacs
@@ -61,10 +49,7 @@ in {
     wakeonlan
 
     # Other development utils
-    gnumake
     git
-    # need 3.17 for now for work. 
-    protobuf3_17
 
     # Other productvity utils
     _1password-gui
@@ -73,7 +58,6 @@ in {
     # Nix tools
     nixfmt
     htop
-    patchelf
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -128,7 +112,7 @@ in {
 
     # Need this for rust development so that the things like openssl linking work.
     envExtra = ''
-      export PKG_CONFIG_PATH="${pkgs.openssl.dev}/lib/pkgconfig"
+      export QT_XCB_GL_INTEGRATION=xcb_egl
     '';
 
     # aliases
@@ -192,6 +176,13 @@ in {
   };
 
   programs.alacritty = { enable = true; };
+
+  programs.direnv = {
+    enable = true;
+    enableZshIntegration = true;
+    nix-direnv.enable = true;
+  };
+
   # TODO: I shouldn't do this, there's probably a better way. This creates a duplicate
   # desktop enry which makes Alacitty show up twice in the launcher, one that works and 
   # the other doesn't. 

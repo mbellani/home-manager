@@ -58,6 +58,8 @@ nix-channel --update
 
 # e.g. ln -s ./home.nix  $HOME/.config/home-manager/home.nix (TODO: make sure to drive path to home.nix in this repo)
 
+# ln -s ./nix.conf  $HOME/.config/nix/nix.conf
+
 # Install/setup everyting via home-manager now
 home-manager switch
 
