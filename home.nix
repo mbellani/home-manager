@@ -48,8 +48,9 @@ in {
     bat
     wakeonlan
 
-    # Other development utils
+    # Development utils
     git
+    docker
 
     # Other productvity utils
     _1password-gui
@@ -136,6 +137,8 @@ in {
       core.editor = "code";
       url = { "git@github.com:" = { insteadOf = "https://github.com"; }; };
     };
+
+    ignores = [".direnv/"];
   };
 
   programs.starship = {
