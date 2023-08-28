@@ -29,6 +29,8 @@ in {
     # stable channel.
     unstable.vivaldi
 
+    yubikey-manager-qt
+
     # Social
     slack
     signal-desktop
@@ -47,6 +49,7 @@ in {
     tmux
     bat
     wakeonlan
+    jq
 
     # Development utils
     git

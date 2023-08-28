@@ -5,6 +5,7 @@ set -ex
 # Capture my current user
 
 USER=$(whoami)
+PWD=$(PWD)
 
 # Get rid of the snap garbage first
 if command -v snap &> /dev/null
@@ -50,15 +51,8 @@ nix-env -iA nixgl.auto.nixGLDefault
 
 nix-channel --update
 
-
-# TODO: Add steps to install git temporarity and clone the repo before calling home-manager swtich
-
-
-## TODO Add a step to create a symlink to home.nix in this repo. 
-
-# e.g. ln -s ./home.nix  $HOME/.config/home-manager/home.nix (TODO: make sure to drive path to home.nix in this repo)
-
-# ln -s ./nix.conf  $HOME/.config/nix/nix.conf
+ln -s $PWD/home.nix  $HOME/.config/home-manager/home.nix
+ln -s $PWD/nix.conf  $HOME/.config/nix/nix.conf
 
 # Install/setup everyting via home-manager now
 home-manager switch
