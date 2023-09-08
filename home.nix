@@ -37,7 +37,7 @@ in {
     zoom-us
 
     ## Editors
-    emacs
+    #emacs
     vscode
     vim # TODO: remove once doom emacs is setup.
 

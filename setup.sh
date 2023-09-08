@@ -5,7 +5,7 @@ set -ex
 # Capture my current user
 
 USER=$(whoami)
-PWD=$(PWD)
+PWD=$(pwd)
 
 # Get rid of the snap garbage first
 if command -v snap &> /dev/null
@@ -47,10 +47,11 @@ nix-shell '<home-manager>' -A install
 nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs-unstable
 # Make sure OpenGL works for applicaitons installed via home-manager e.g alacritty
 nix-channel --add https://github.com/guibou/nixGL/archive/main.tar.gz nixgl 
+nix-channel --update
 nix-env -iA nixgl.auto.nixGLDefault
 
-nix-channel --update
 
+rm -rf $HOME/.config/home-manager/home.nix
 ln -s $PWD/home.nix  $HOME/.config/home-manager/home.nix
 ln -s $PWD/nix.conf  $HOME/.config/nix/nix.conf
 
