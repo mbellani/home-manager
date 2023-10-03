@@ -1,8 +1,6 @@
 { config, pkgs, ... }:
 
-let unstable = import <nixpkgs-unstable> { config.allowUnfree = true; };
-
-in {
+{
   # Home Manager needs a bit of information about you and the paths it should
   # manage. 
   home.username = "mbellani";
@@ -25,9 +23,7 @@ in {
   home.packages = with pkgs; [
     # Browsers, one too many
     firefox
-    # Unstable packages, some latest versions of packages may not be available on the
-    # stable channel.
-    unstable.vivaldi
+    vivaldi
 
     yubikey-manager-qt
 
@@ -35,6 +31,7 @@ in {
     slack
     signal-desktop
     zoom-us
+    whatsapp-for-linux
 
     ## Editors
     #emacs
@@ -50,6 +47,7 @@ in {
     bat
     wakeonlan
     jq
+    jellyfin-ffmpeg
 
     # Development utils
     git
@@ -62,6 +60,11 @@ in {
     # Nix tools
     nixfmt
     htop
+
+    # NixGL related stuff
+    glxinfo
+    ## nixgl.nixGLIntel -- TODO: Fix this
+    neofetch
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -123,7 +126,7 @@ in {
     shellAliases = {
       # nixGL allows alacritty to discover GPU driver libs (e.g. mesa). Additional setup
       # is needed that's part of setup.sh. See issue: https://github.com/NixOS/nixpkgs/issues/122671.
-      alacritty = "nixGL alacritty";
+      # alacritty = "nixGL alacritty";
       hms = "home-manager switch";
     };
 
@@ -141,7 +144,7 @@ in {
       url = { "git@github.com:" = { insteadOf = "https://github.com"; }; };
     };
 
-    ignores = [".direnv/"];
+    ignores = [ ".direnv/" ];
   };
 
   programs.starship = {
@@ -189,12 +192,9 @@ in {
     nix-direnv.enable = true;
   };
 
-  # TODO: I shouldn't do this, there's probably a better way. This creates a duplicate
-  # desktop enry which makes Alacitty show up twice in the launcher, one that works and 
-  # the other doesn't. 
-  xdg.desktopEntries.alacritty = {
+  xdg.desktopEntries.Alacritty = {
     type = "Application";
-    exec = "nixGL alacritty";
+    exec = "nixGLIntel alacritty";
     icon = "Alacritty";
     terminal = false;
     name = "Alacritty";
@@ -202,6 +202,12 @@ in {
     comment = "A fast, cross-platform, OpenGL terminal emulator";
   };
 
+  xdg.desktopEntries.Zoom = {
+    type = "Application";
+    exec = "env QT_XCB_GL_INTEGRATION=xcb_egl nixGLIntel zoom";
+    name = "Zoom";
+    icon = "Zoom";
+  };
   # Allow gnome to see applications installed via home-manager
   targets.genericLinux.enable = true;
 
